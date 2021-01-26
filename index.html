@@ -36,7 +36,7 @@
             <div class="col-md-4 ">
                 <div class="withdraw status">
                     <h5>Withdraw</h5>
-                    <h2>$00</h2>
+                    <h2> $ <span id="CurrentWithdraw">00</span> </h2>
                 </div>
             </div>
 
@@ -88,6 +88,7 @@
 
 
             updateSpanText("curentDeposit", depositNumber)
+
             updateSpanText("curentBalance", depositNumber)
 
             document.getElementById("depositAmount").value = "";
@@ -97,7 +98,10 @@
         withdrow.addEventListener("click", function () {
 
             const withdrowNumber = getInputNumber("withdrow-amount");
-            console.log(withdrowNumber);
+            updateSpanText("CurrentWithdraw", withdrowNumber);
+            updateSpanText("curentBalance",-1* withdrowNumber);
+            
+            document.getElementById("withdrow-amount").value = "";
 
         })
 
@@ -108,12 +112,12 @@
             return amountNumber;
         }
 
-        function updateSpanText(id, depositNumber) {
+        function updateSpanText(id, addedNumber) {
 
 
             const current = document.getElementById(id).innerText;
             const currentNumber = parseFloat(current);
-            const total = depositNumber + currentNumber;
+            const total = addedNumber + currentNumber;
             document.getElementById(id).innerText = total;
         }
 
